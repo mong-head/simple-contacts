@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './assets/css/App.css';
-import Contacts from './Contacts';
+import Contacts from './Contacts/Layout';
 
 function App() {
   return (
