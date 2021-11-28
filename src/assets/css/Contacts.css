@@ -102,6 +102,15 @@ h1 {
     flex-direction: column;
 }
 
+.contact-box-unclicked {
+    flex: 1 1 0%;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
 .contact {
     display: flex;
     padding: 10px;
