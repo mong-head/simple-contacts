@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import '../../assets/css/Contacts.css';
 import SearchContact from './ContactList/SearchContact';
 import ContactList from './ContactList/ContactList';
@@ -6,16 +7,9 @@ import Contact from './ContactInfo/Contact';
 
 class Contacts extends Component {
 
-    constructor(props){
-        super(props);
-
-        this.state = {
-            selectedContact : false
-        }
-    }
-
     render(){
-        const {handleAddButton} = this.props;
+        const {handleAddButton,selectedContact} = this.props;
+
         return(
             <div className={'contacts-box'}>
                 <div className={'contacts-list-box'}>
@@ -23,13 +17,17 @@ class Contacts extends Component {
                     <ContactList />
                 </div>
                 {
-                    this.state.selectedContact ? <Contact /> : <div class={'contact-box-unclicked'}>{'선택된 연락처가 없습니다.'}</div>
+                    selectedContact ? <Contact /> : <div class={'contact-box-unclicked'}>{'선택된 연락처가 없습니다.'}</div>
                 }
                 <button className={'contact-button add-contact'} onClick={() => handleAddButton(false)}>+</button>
-                <button className={'contact-button delete-contact'} disabled>-</button>
+                <button className={'contact-button delete-contact'} disabled={!selectedContact}>-</button>
             </div>
         )
     }
 }
 
-export default Contacts
+const mapStateToProps = (state) => ({
+    selectedContact : state.selectedContact
+});
+
+export default connect(mapStateToProps)(Contacts)

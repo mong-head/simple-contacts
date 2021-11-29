@@ -3,13 +3,14 @@ import '../../../assets/css/Contacts.css'
 
 class ContactItem extends Component {
     render(){
+        const {title,value} = this.props;
         return(
             <dl className={'contact'}>
                 <dt>
-                    {this.props.title}
+                    {title}
                 </dt>
                 <dd>
-                    {'김김김'}
+                    {value}
                 </dd>
             </dl>
         )
