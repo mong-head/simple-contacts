@@ -1,26 +1,77 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import '../../assets/css/Contacts.css';
 import EnrollItem from './EnrollItem';
+import {contactsAddAction} from '../../Store/Actions/contactsAction'
 
 class Enrollment extends Component {
 
-    constructor(){
-        super(...arguments);
+    constructor(props){
+        super(props);
 
-        this.titles = ['이름','전화번호','나이','email','설명']
+        this.state = {
+            name : '',
+            number : '',
+            age : '',
+            email : '',
+            details : ''
+        }
+    }
+
+    handleName = (value) => {
+        this.setState({name: value});
+    }
+
+    handleNumber = (value) => {
+        this.setState({number: value});
+    }
+
+    handleAge = (value) => {
+        this.setState({age: value});
+    }
+
+    handleEmail = (value) => {
+        this.setState({email: value});
+    }
+
+    handleDetails = (value) => {
+        this.setState({details: value});
+    }
+
+    handleSubmit = () => {
+        const {handleAddButton,addContact} = this.props;
+        const {name,number,age,email,details} = this.state;
+        
+        const contact = {
+            name: name,
+            number: number,
+            age: age,
+            email: email,
+            details: details
+        }
+
+        addContact(contact);
+        handleAddButton(true);
     }
 
     render(){
+        const {handleAddButton} = this.props;
+        const {name,number,age,email,details} = this.state;
+        const {handleName,handleAge,handleDetails,handleEmail,handleNumber,handleSubmit} = this;
+        
         return(
             <div className={'enroll-contact-box'}>
                 <div className={'enroll-contact'}>
                     <h1>연락처를 등록하세요</h1>
-                    {
-                        this.titles.map((title,i) => <EnrollItem key={i} title={title} />)
-                    }
+                    <EnrollItem key={0} title={'이름'} value={name} onChange={handleName}/>
+                    <EnrollItem key={1} title={'전화번호'} value={number} onChange={handleNumber}/>
+                    <EnrollItem key={2} title={'나이'} value={age} onChange={handleAge}/>
+                    <EnrollItem key={3} title={'email'} value={email} onChange={handleEmail}/>
+                    <EnrollItem key={4} title={'설명'} value={details} onChange={handleDetails}/>
+
                     <div className={'enroll-button-box'}>
-                        <button className={'enroll-ok'}>확인</button>
-                        <button className={'enroll-cancel'}>취소</button>
+                        <button className={'enroll-ok'} onClick={handleSubmit}>확인</button>
+                        <button className={'enroll-cancel'} onClick={() => handleAddButton(true)}>취소</button>
                     </div>
                 </div>
             </div>
@@ -28,4 +79,16 @@ class Enrollment extends Component {
     }
 }
 
-export default Enrollment
+// useSelector
+const mapStateToProps = (state) => ({
+    contacts: state.contacts
+  })
+
+// useDispatcher
+const mapDispatchToProps = (Dispatch) => {
+    return {
+        addContact : (contact) => Dispatch(contactsAddAction(contact))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Enrollment)

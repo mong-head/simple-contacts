@@ -6,8 +6,8 @@ import Contact from './ContactInfo/Contact';
 
 class Contacts extends Component {
 
-    constructor(){
-        super(...arguments);
+    constructor(props){
+        super(props);
 
         this.state = {
             selectedContact : false
@@ -15,6 +15,7 @@ class Contacts extends Component {
     }
 
     render(){
+        const {handleAddButton} = this.props;
         return(
             <div className={'contacts-box'}>
                 <div className={'contacts-list-box'}>
@@ -24,7 +25,7 @@ class Contacts extends Component {
                 {
                     this.state.selectedContact ? <Contact /> : <div class={'contact-box-unclicked'}>{'선택된 연락처가 없습니다.'}</div>
                 }
-                <button className={'contact-button add-contact'}>+</button>
+                <button className={'contact-button add-contact'} onClick={() => handleAddButton(false)}>+</button>
                 <button className={'contact-button delete-contact'} disabled>-</button>
             </div>
         )

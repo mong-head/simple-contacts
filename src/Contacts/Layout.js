@@ -7,8 +7,8 @@ import Enrollment from './Enroll/Enrollment';
 
 class Layout extends Component {
 
-    constructor(){
-        super(...arguments);
+    constructor(props){
+        super(props);
 
         this.state = {
             addButton : true
@@ -16,13 +16,18 @@ class Layout extends Component {
 
     }
 
+    handleAddButton = (state) => {
+        this.setState({addButton: state})
+    }
+
 
     render() {
+        const {addButton} = this.state
         return (
             <div className={'contacts'}>
                 <h1>Unit6 연락처</h1>
                 {
-                    this.state.addButton ? <Contacts /> : <Enrollment />
+                    addButton ? <Contacts handleAddButton={this.handleAddButton}/> : <Enrollment handleAddButton={this.handleAddButton}/>
                 }
             </div>
         );

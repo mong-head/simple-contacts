@@ -1,7 +1,7 @@
 const contactsReducer = (state = [], action) => {
     switch (action.type) {
-        case 'CONTACTS':
-            return action.contacts;
+        case 'CONTACTS_ADD':
+            return [...state,action.contact];
         default:
             return state;
     }

@@ -1,4 +1,4 @@
-export const contactsAction = (contacts) => ({
-    type: 'CONTACTS',
-    contacts
+export const contactsAddAction = (contact) => ({
+    type: 'CONTACTS_ADD',
+    contact
 });
