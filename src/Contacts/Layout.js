@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import '../assets/css/Contacts.css';
 import Contacts from './Contacts/Contacts';
 import Enrollment from './Enroll/Enrollment';
+
 
 class Layout extends Component {
 
@@ -9,9 +11,11 @@ class Layout extends Component {
         super(...arguments);
 
         this.state = {
-            addButton : false
+            addButton : true
         }
+
     }
+
 
     render() {
         return (
@@ -25,4 +29,9 @@ class Layout extends Component {
     }
 }
 
-export default Layout;
+// useSelector 비슷
+const mapStateToProps = (state) => ({
+    contacts : state.contacts
+});
+
+export default connect(mapStateToProps)(Layout);
