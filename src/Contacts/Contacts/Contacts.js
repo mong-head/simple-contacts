@@ -8,7 +8,7 @@ import Contact from './ContactInfo/Contact';
 class Contacts extends Component {
 
     render(){
-        const {handleAddButton,selectedContact} = this.props;
+        const {handleAddButton,handleDeleteButton,selectedContact} = this.props;
 
         return(
             <div className={'contacts-box'}>
@@ -20,7 +20,7 @@ class Contacts extends Component {
                     selectedContact ? <Contact /> : <div class={'contact-box-unclicked'}>{'선택된 연락처가 없습니다.'}</div>
                 }
                 <button className={'contact-button add-contact'} onClick={() => handleAddButton(false)}>+</button>
-                <button className={'contact-button delete-contact'} disabled={!selectedContact}>-</button>
+                <button className={'contact-button delete-contact'} disabled={!selectedContact} onClick={() => handleDeleteButton()}>-</button>
             </div>
         )
     }
