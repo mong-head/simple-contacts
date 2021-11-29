@@ -38,10 +38,24 @@ class Enrollment extends Component {
         this.setState({details: value});
     }
 
+    validateValue = (contact) => {
+        const {name,number,age,email,details} = contact;
+
+        // 빈 값 체크
+        if(name === '' || number === '' || age === '' || email === '' || details === '') return false;
+
+        const ageCheck = /^[1-9]?[0-9]{1}$|^100$/;
+        const emailCheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const numberCheck = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+
+        if(ageCheck.test(age) && emailCheck.test(email) && numberCheck.test(number)) return true;
+        else return false;
+    }
+
     handleSubmit = () => {
         const {handleAddButton,addContact} = this.props;
         const {name,number,age,email,details} = this.state;
-        
+
         const contact = {
             name: name,
             number: number,
@@ -49,6 +63,8 @@ class Enrollment extends Component {
             email: email,
             details: details
         }
+
+        if(!this.validateValue(contact)) return;
 
         addContact(contact);
         handleAddButton(true);

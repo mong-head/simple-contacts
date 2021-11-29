@@ -14,7 +14,7 @@ class ContactList extends Component {
         return(
             <ul className={'contacts-list'}>
                 {
-                    filteredContacts.map(contact => <ContactListItem contact={contact} />)
+                    filteredContacts.map((contact,i) => <ContactListItem key={i} contact={contact} />)
                 }
             </ul>
         )
