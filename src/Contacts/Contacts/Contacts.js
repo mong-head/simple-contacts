@@ -7,14 +7,28 @@ import Contact from './ContactInfo/Contact';
 
 class Contacts extends Component {
 
+    constructor(props){
+        super(props);
+
+        this.state = {
+            searchInput : ''
+        }
+    }
+
+    handleSearchInput = (input) => {
+        this.setState({searchInput: input});
+    }
+
     render(){
+        const {searchInput} = this.state;
+        const {handleSearchInput} = this;
         const {handleAddButton,handleDeleteButton,selectedContact} = this.props;
 
         return(
             <div className={'contacts-box'}>
                 <div className={'contacts-list-box'}>
-                    <SearchContact />
-                    <ContactList />
+                    <SearchContact searchInput={searchInput} handleSearchInput={handleSearchInput} />
+                    <ContactList searchInput={searchInput} />
                 </div>
                 {
                     selectedContact ? <Contact /> : <div class={'contact-box-unclicked'}>{'선택된 연락처가 없습니다.'}</div>

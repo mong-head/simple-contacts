@@ -5,12 +5,16 @@ import ContactListItem from './ContactListItem';
 
 class ContactList extends Component {
     render(){
-        const {contacts} = this.props;
+        const {contacts,searchInput} = this.props;
+        
+        const filteredContacts = contacts.filter(contact => {
+            return Object.keys(contact).map((item) => contact[item].includes(searchInput)).includes(true);
+        })
 
         return(
             <ul className={'contacts-list'}>
                 {
-                    contacts.map(contact => <ContactListItem contact={contact} />)
+                    filteredContacts.map(contact => <ContactListItem contact={contact} />)
                 }
             </ul>
         )
