@@ -13,10 +13,10 @@ class ContactListItem extends Component {
 
     render(){
         const {handleClick} = this;
-        const {contact} = this.props;
+        const {contact,selectedContact} = this.props;
 
         return(
-            <li className={ false ? 'list-contact-clicked' : 'list-contact-unclicked'}>
+            <li className={ selectedContact === contact ? 'list-contact-clicked' : 'list-contact-unclicked'}>
                 <button className={'list-contact-button'} onClick={handleClick}>
                     <div className={'contact-name'}>
                         {contact.name}
@@ -30,10 +30,14 @@ class ContactListItem extends Component {
     }
 }
 
+const mapStateToProps = (state) => ({
+    selectedContact : state.selectedContact
+});
+
 const mapDispatchToProps = (Dispatch) => {
     return {
         selectContact : (contact) => Dispatch(selectedContactAction(contact))
     }
 }
 
-export default connect(null,mapDispatchToProps)(ContactListItem)
+export default connect(mapStateToProps,mapDispatchToProps)(ContactListItem)
