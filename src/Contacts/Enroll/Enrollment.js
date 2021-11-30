@@ -16,26 +16,14 @@ class Enrollment extends Component {
             email : '',
             details : ''
         }
-    }
 
-    handleName = (value) => {
-        this.setState({name: value});
-    }
-
-    handleNumber = (value) => {
-        this.setState({number: value});
-    }
-
-    handleAge = (value) => {
-        this.setState({age: value});
-    }
-
-    handleEmail = (value) => {
-        this.setState({email: value});
-    }
-
-    handleDetails = (value) => {
-        this.setState({details: value});
+        this.titles = {
+            '이름' : 'name',
+            '나이' : 'age',
+            '전화번호' : 'number',
+            'Email' : 'email',
+            '설명' : 'details'
+        };
     }
 
     validateValue = (contact) => {
@@ -73,17 +61,23 @@ class Enrollment extends Component {
     render(){
         const {handleAddButton} = this.props;
         const {name,number,age,email,details} = this.state;
-        const {handleName,handleAge,handleDetails,handleEmail,handleNumber,handleSubmit} = this;
-        
+        const {titles,handleSubmit} = this;
+        const contact = {
+            'name' : name,
+            'number' : number,
+            'age' : age,
+            'email' : email,
+            'details' : details
+        }
+
         return(
             <div className={'enroll-contact-box'}>
                 <div className={'enroll-contact'}>
                     <h1>연락처를 등록하세요</h1>
-                    <EnrollItem key={0} title={'이름'} value={name} onChange={handleName}/>
-                    <EnrollItem key={1} title={'전화번호'} value={number} onChange={handleNumber}/>
-                    <EnrollItem key={2} title={'나이'} value={age} onChange={handleAge}/>
-                    <EnrollItem key={3} title={'email'} value={email} onChange={handleEmail}/>
-                    <EnrollItem key={4} title={'설명'} value={details} onChange={handleDetails}/>
+                    {
+                        Object.keys(titles).map((title,i) => 
+                            <EnrollItem key={i} title={title} value={contact[titles[title]]} onChange={value =>  this.setState({ [titles[title]] : value})} />)
+                    }
 
                     <div className={'enroll-button-box'}>
                         <button className={'enroll-ok'} onClick={handleSubmit}>확인</button>
