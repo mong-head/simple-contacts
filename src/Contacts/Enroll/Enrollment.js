@@ -31,14 +31,15 @@ class Enrollment extends Component {
         const {name,phoneNumber,age,email,description} = contact;
 
         // 빈 값 체크
-        if(name === '' || phoneNumber === '' || age === '' || email === '' || description === '') return false;
+        if(name === '' || phoneNumber === '' || age === '' || email === '') return false;
+        else return true;
 
-        const ageCheck = /^[1-9]?[0-9]{1}$|^100$/;
-        const emailCheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        const numberCheck = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+        // const ageCheck = /^[1-9]?[0-9]{1}$|^100$/;
+        // const emailCheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        // const numberCheck = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
-        if(ageCheck.test(age) && emailCheck.test(email) && numberCheck.test(phoneNumber)) return true;
-        else return false;
+        // if(ageCheck.test(age) && emailCheck.test(email) && numberCheck.test(phoneNumber)) return true;
+        // else return false;
     }
 
     handleSubmit = async () => {
