@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import fetchApi from '../../fetchApi';
 import '../../assets/css/Contacts.css';
 import EnrollItem from './EnrollItem';
 import {contactsAddAction} from '../../Store/Actions/contactsAction'
@@ -14,60 +15,62 @@ class Enrollment extends Component {
             number : '',
             age : '',
             email : '',
-            details : ''
+            description : ''
         }
 
         this.titles = {
             '이름' : 'name',
             '나이' : 'age',
-            '전화번호' : 'number',
+            '전화번호' : 'phoneNumber',
             'Email' : 'email',
-            '설명' : 'details'
+            '설명' : 'description'
         };
     }
 
     validateValue = (contact) => {
-        const {name,number,age,email,details} = contact;
+        const {name,phoneNumber,age,email,description} = contact;
 
         // 빈 값 체크
-        if(name === '' || number === '' || age === '' || email === '' || details === '') return false;
+        if(name === '' || phoneNumber === '' || age === '' || email === '' || description === '') return false;
 
         const ageCheck = /^[1-9]?[0-9]{1}$|^100$/;
         const emailCheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         const numberCheck = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
-        if(ageCheck.test(age) && emailCheck.test(email) && numberCheck.test(number)) return true;
+        if(ageCheck.test(age) && emailCheck.test(email) && numberCheck.test(phoneNumber)) return true;
         else return false;
     }
 
-    handleSubmit = () => {
+    handleSubmit = async () => {
         const {handleAddButton,addContact} = this.props;
-        const {name,number,age,email,details} = this.state;
+        const {name,phoneNumber,age,email,description} = this.state;
 
         const contact = {
             name: name,
-            number: number,
+            phoneNumber: phoneNumber,
             age: age,
             email: email,
-            details: details
+            description: description
         }
 
         if(!this.validateValue(contact)) return;
 
-        addContact(contact);
+        contact.age = Number(contact.age);
+        this.results = await fetchApi().addContact(contact);
+        addContact(this.results);
         handleAddButton(true);
     }
 
     render(){
         const {handleAddButton} = this.props;
-        const {name,number,age,email,details} = this.state;
+        const {name,phoneNumber,age,email,description} = this.state;
         const {titles,handleSubmit} = this;
         const contact = {
             'name' : name,
-            'number' : number,
+            'phoneNumber' : phoneNumber,
             'age' : age,
             'email' : email,
-            'details' : details
+            'description' : description
         }
 
         return(

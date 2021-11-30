@@ -7,14 +7,19 @@ class ContactList extends Component {
     render(){
         const {contacts,searchInput} = this.props;
         
-        const filteredContacts = contacts.filter(contact => {
-            return Object.keys(contact).map((item) => contact[item].includes(searchInput)).includes(true);
+        const filteredContacts = contacts.length > 0 && contacts.filter(contact => {
+            return Object.keys(contact).map((item) => {
+                let result;
+                result = (contact[item]).toString().includes(searchInput)
+                item === 'id' && (result = false); // id 제외 찾기
+                return result;
+            }).includes(true);
         })
 
         return(
             <ul className={'contacts-list'}>
                 {
-                    filteredContacts.map((contact,i) => <ContactListItem key={i} contact={contact} />)
+                    filteredContacts && filteredContacts.map((contact,i) => <ContactListItem key={i} contact={contact} />)
                 }
             </ul>
         )

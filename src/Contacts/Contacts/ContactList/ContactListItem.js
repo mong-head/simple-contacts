@@ -22,7 +22,7 @@ class ContactListItem extends Component {
                         {contact.name}
                     </div>
                     <div className={'contact-number'}>
-                        {contact.number}
+                        {contact.phoneNumber}
                     </div>
                 </button>
             </li>

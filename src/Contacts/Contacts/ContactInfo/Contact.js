@@ -11,9 +11,9 @@ class Contact extends Component {
         this.titles = {
             '이름' : 'name',
             '나이' : 'age',
-            '전화번호' : 'number',
+            '전화번호' : 'phoneNumber',
             'Email' : 'email',
-            '설명' : 'details'
+            '설명' : 'description'
         };
     }
 

@@ -3,7 +3,9 @@ const contactsReducer = (state = [], action) => {
         case 'CONTACTS_ADD':
             return [...state, action.contact];
         case 'CONTACTS_DELETE':
-            return state.filter(contact => contact !== action.contact);
+            return state.filter(contact => contact.id !== action.contact.id);
+        case 'CONTACTS_SET':
+            return action.contacts;
         default:
             return state;
     }
