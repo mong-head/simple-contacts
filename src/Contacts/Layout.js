@@ -15,41 +15,36 @@ class Layout extends Component {
         this.state = {
             addButton : true
         }
-
     }
 
-    componentDidMount() {
-        (async () => {
-            this.results = await fetchApi().getAll();
-            this.props.setContacts(this.results);
-        })()
+    async componentDidMount() {
+        const results = await fetchApi().getAll();
+        this.props.setContacts(results);
     }
 
     handleAddButton = (state) => {
         this.setState({addButton: state})
     }
 
-    handleDeleteButton = () => {
+    handleDeleteButton = async () => {
         const {selectedContact,deleteContact,emptySelectedContact} = this.props;
         
-        (async () => {
-            this.results = await fetchApi().deleteContact(selectedContact['id']);
-            deleteContact(this.results);
-            emptySelectedContact();
-        })()
+        const results = await fetchApi().deleteContact(selectedContact['id']);
+        deleteContact(results);
+        emptySelectedContact();
     }
 
 
     render() {
         const {addButton} = this.state;
 
-        console.log('contacts',this.props.contacts)
-
         return (
             <div className={'contacts'}>
                 <h1>Unit6 연락처</h1>
                 {
-                    addButton ? <Contacts handleAddButton={this.handleAddButton} handleDeleteButton={this.handleDeleteButton}/> : <Enrollment handleAddButton={this.handleAddButton} />
+                    addButton ? 
+                        <Contacts handleAddButton={this.handleAddButton} handleDeleteButton={this.handleDeleteButton}/> : 
+                        <Enrollment handleAddButton={this.handleAddButton} />
                 }
             </div>
         );

@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import fetchApi from '../../fetchApi';
 import '../../assets/css/Contacts.css';
 import EnrollItem from './EnrollItem';
-import {contactsAddAction} from '../../Store/Actions/contactsAction'
+import {contactsAddAction} from '../../Store/Actions/contactsAction';
+import titles from '../../titles';
 
 class Enrollment extends Component {
 
@@ -12,26 +13,18 @@ class Enrollment extends Component {
 
         this.state = {
             name : '',
-            number : '',
+            phoneNumber : '',
             age : '',
             email : '',
             description : ''
         }
-
-        this.titles = {
-            '이름' : 'name',
-            '나이' : 'age',
-            '전화번호' : 'phoneNumber',
-            'Email' : 'email',
-            '설명' : 'description'
-        };
     }
 
     validateValue = (contact) => {
         const {name,phoneNumber,age,email,description} = contact;
 
         // 빈 값 체크
-        if(name === '' || phoneNumber === '' || age === '' || email === '') return false;
+        if( !name || !phoneNumber || !age || !email ) return false;
         else return true;
 
         // const ageCheck = /^[1-9]?[0-9]{1}$|^100$/;
@@ -57,15 +50,15 @@ class Enrollment extends Component {
         if(!this.validateValue(contact)) return;
 
         contact.age = Number(contact.age);
-        this.results = await fetchApi().addContact(contact);
-        addContact(this.results);
+        const results = await fetchApi().addContact(contact);
+        addContact(results);
         handleAddButton(true);
     }
 
     render(){
         const {handleAddButton} = this.props;
         const {name,phoneNumber,age,email,description} = this.state;
-        const {titles,handleSubmit} = this;
+        const {handleSubmit} = this;
         const contact = {
             'name' : name,
             'phoneNumber' : phoneNumber,

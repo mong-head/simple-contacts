@@ -21,13 +21,13 @@ class Contacts extends Component {
 
     render(){
         const {searchInput} = this.state;
-        const {handleSearchInput} = this;
+        const {onChangeSearchInput} = this; // 네이밍 : onChangeSearchInput (동사형, onChange와 관련되어있으면 그에 대한 이름으로)
         const {handleAddButton,handleDeleteButton,selectedContact} = this.props;
 
         return(
             <div className={'contacts-box'}>
                 <div className={'contacts-list-box'}>
-                    <SearchContact searchInput={searchInput} handleSearchInput={handleSearchInput} />
+                    <SearchContact searchInput={searchInput} handleSearchInput={onChangeSearchInput} />
                     <ContactList searchInput={searchInput} />
                 </div>
                 {
