@@ -74,7 +74,7 @@ class Enrollment extends Component {
                     <h1>연락처를 등록하세요</h1>
                     {
                         Object.keys(titles).map((title,i) => 
-                            <EnrollItem key={i} title={title} value={contact[titles[title]]} 
+                            <EnrollItem key={title} title={title} value={contact[titles[title]]} 
                                         onChange={value => this.setState({ [titles[title]] : value})} />)
                     }
 
