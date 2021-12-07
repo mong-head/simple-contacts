@@ -36,7 +36,7 @@ class Enrollment extends Component {
     }
 
     handleSubmit = async () => {
-        const {handleAddButton,addContact} = this.props;
+        const {onClickAddButton,addContact} = this.props;
         const {name,phoneNumber,age,email,description} = this.state;
 
         const contact = {
@@ -52,11 +52,11 @@ class Enrollment extends Component {
         contact.age = Number(contact.age);
         const results = await fetchApi().addContact(contact);
         addContact(results);
-        handleAddButton(true);
+        onClickAddButton(true);
     }
 
     render(){
-        const {handleAddButton} = this.props;
+        const {onClickAddButton} = this.props;
         const {name,phoneNumber,age,email,description} = this.state;
         const {handleSubmit} = this;
         const contact = {
@@ -73,12 +73,13 @@ class Enrollment extends Component {
                     <h1>연락처를 등록하세요</h1>
                     {
                         Object.keys(titles).map((title,i) => 
-                            <EnrollItem key={i} title={title} value={contact[titles[title]]} onChange={value =>  this.setState({ [titles[title]] : value})} />)
+                            <EnrollItem key={i} title={title} value={contact[titles[title]]} 
+                                        onChange={value => this.setState({ [titles[title]] : value})} />)
                     }
 
                     <div className={'enroll-button-box'}>
                         <button className={'enroll-ok'} onClick={handleSubmit}>확인</button>
-                        <button className={'enroll-cancel'} onClick={() => handleAddButton(true)}>취소</button>
+                        <button className={'enroll-cancel'} onClick={() => onClickAddButton(true)}>취소</button>
                     </div>
                 </div>
             </div>

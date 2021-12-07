@@ -5,19 +5,20 @@ import {selectedContactAction} from '../../../Store/Actions/selectedContactActio
 
 class ContactListItem extends Component {
 
-    handleClick = (e) => {
+    // click하거나 tab키 눌렀을 때
+    handleFocusContact = (e) => {
         const {contact,selectContact} = this.props;
 
         selectContact(contact);
     }
 
     render(){
-        const {handleClick} = this;
+        const {handleFocusContact} = this;
         const {contact,selectedContact} = this.props;
 
         return(
-            <li className={ selectedContact === contact ? 'list-contact-clicked' : 'list-contact-unclicked'}>
-                <button className={'list-contact-button'} onClick={handleClick}>
+            <li className={ selectedContact === contact ? 'list-contact-clicked' : 'list-contact-unclicked'} >
+                <button className={'list-contact-button'} onFocus={handleFocusContact}>
                     <div className={'contact-name'}>
                         {contact.name}
                     </div>

@@ -22,11 +22,11 @@ class Layout extends Component {
         this.props.setContacts(results);
     }
 
-    handleAddButton = (state) => {
+    onClickAddButton = (state) => {
         this.setState({addButton: state})
     }
 
-    handleDeleteButton = async () => {
+    onClickDeleteButton = async () => {
         const {selectedContact,deleteContact,emptySelectedContact} = this.props;
         
         const results = await fetchApi().deleteContact(selectedContact['id']);
@@ -43,8 +43,8 @@ class Layout extends Component {
                 <h1>Unit6 연락처</h1>
                 {
                     addButton ? 
-                        <Contacts handleAddButton={this.handleAddButton} handleDeleteButton={this.handleDeleteButton}/> : 
-                        <Enrollment handleAddButton={this.handleAddButton} />
+                        <Contacts onClickAddButton={this.onClickAddButton} onClickDeleteButton={this.onClickDeleteButton}/> : 
+                        <Enrollment onClickAddButton={this.onClickAddButton} />
                 }
             </div>
         );

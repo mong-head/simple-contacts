@@ -11,30 +11,30 @@ class Contacts extends Component {
         super(props);
 
         this.state = {
-            searchInput : ''
+            keyword : ''
         }
     }
 
-    handleSearchInput = (input) => {
-        this.setState({searchInput: input});
+    onChangeKeyword = (input) => {
+        this.setState({keyword: input});
     }
 
     render(){
-        const {searchInput} = this.state;
-        const {onChangeSearchInput} = this; // 네이밍 : onChangeSearchInput (동사형, onChange와 관련되어있으면 그에 대한 이름으로)
-        const {handleAddButton,handleDeleteButton,selectedContact} = this.props;
+        const {keyword} = this.state;
+        const {onChangeKeyword} = this; // 네이밍 : onChangeKeyword (동사형, onChange와 관련되어있으면 그에 대한 이름으로)
+        const {onClickAddButton,onClickDeleteButton,selectedContact} = this.props;
 
         return(
             <div className={'contacts-box'}>
                 <div className={'contacts-list-box'}>
-                    <SearchContact searchInput={searchInput} handleSearchInput={onChangeSearchInput} />
-                    <ContactList searchInput={searchInput} />
+                    <SearchContact keyword={keyword} onChangeKeyword={onChangeKeyword} />
+                    <ContactList keyword={keyword} />
                 </div>
                 {
                     selectedContact ? <Contact /> : <div class={'contact-box-unclicked'}>{'선택된 연락처가 없습니다.'}</div>
                 }
-                <button className={'contact-button add-contact'} onClick={() => handleAddButton(false)}>+</button>
-                <button className={'contact-button delete-contact'} disabled={!selectedContact} onClick={() => handleDeleteButton()}>-</button>
+                <button className={'contact-button add-contact'} onClick={() => onClickAddButton(false)}>+</button>
+                <button className={'contact-button delete-contact'} disabled={!selectedContact} onClick={() => onClickDeleteButton()}>-</button>
             </div>
         )
     }
