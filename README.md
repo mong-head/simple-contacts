@@ -6,9 +6,20 @@
 
 * `onFocus` : Tab하거나 Click하는 경우 focus
 
-* useCallback ?
+* useCallback
+    * 리랜더링마다 함수가 새로 생성되는 것을 막음
+    * 한번 만들어진 함수를 재사용하기 위해서 사용함
+    * 최적화된 자식 컴포넌트에 props로 콜백 함수를 내려줄 때 유용함
 
-* immutable
+* Immutability Helper
+    * `react-addons-update` module 설치 필요
+    * 중첩된 object 다루기 쉬움
+    * 하지만 깊은 복사는 아닌 듯
+
+* symbol
+    * object 내의 고유한 값을 숨길 때 사용가능
+    * map등 일반적인 함수에서 symbol 타입 변수는 보이지 않음
+    * 실무에서는 별로 안쓰인다고 함
 
 ## 주의할 점
 
@@ -22,6 +33,8 @@
     * state : 명사형
 
 * 쓸데없는 확인 구문 쓰지 말기
+
+* `let` 보다는 `const`
 
 * 변수 작성시 컴포넌트 내에서 유일한 값이 아니라면 this사용해서 선언하지 말기
 
