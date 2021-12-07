@@ -6,6 +6,7 @@ import Contacts from './Contacts/Contacts';
 import Enrollment from './Enroll/Enrollment';
 import {contactsDeleteAction, contactsSetAction} from '../Store/Actions/contactsAction';
 import {selectedContactAction} from '../Store/Actions/selectedContactAction'
+import {id, symbolizeObjectId} from '../symbolizeObjectId';
 
 class Layout extends Component {
 
@@ -18,7 +19,7 @@ class Layout extends Component {
     }
 
     async componentDidMount() {
-        const results = await fetchApi().getAll();
+        const results = (await fetchApi().getAll()).map(symbolizeObjectId);
         this.props.setContacts(results);
     }
 
@@ -29,8 +30,8 @@ class Layout extends Component {
     onClickDeleteButton = async () => {
         const {selectedContact,deleteContact,emptySelectedContact} = this.props;
         
-        const results = await fetchApi().deleteContact(selectedContact['id']);
-        deleteContact(results);
+        const deletedContact = await fetchApi().deleteContact(selectedContact[id]);
+        deleteContact(symbolizeObjectId(deletedContact));
         emptySelectedContact();
     }
 

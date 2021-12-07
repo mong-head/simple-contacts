@@ -5,6 +5,7 @@ import '../../assets/css/Contacts.css';
 import EnrollItem from './EnrollItem';
 import {contactsAddAction} from '../../Store/Actions/contactsAction';
 import titles from '../../titles';
+import {symbolizeObjectId} from '../../symbolizeObjectId';
 
 class Enrollment extends Component {
 
@@ -50,8 +51,8 @@ class Enrollment extends Component {
         if(!this.validateValue(contact)) return;
 
         contact.age = Number(contact.age);
-        const results = await fetchApi().addContact(contact);
-        addContact(results);
+        const addedContact = await fetchApi().addContact(contact);
+        addContact(symbolizeObjectId(addedContact));
         onClickAddButton(true);
     }
 

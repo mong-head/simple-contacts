@@ -3,23 +3,19 @@ import { connect } from 'react-redux';
 import '../../../assets/css/Contacts.css';
 import ContactListItem from './ContactListItem';
 import {selectedContactAction} from '../../../Store/Actions/selectedContactAction';
+import {id} from '../../../symbolizeObjectId'
 
 class ContactList extends Component {
 
     render(){
         const {contacts,keyword} = this.props;
 
-        const filteredContacts = contacts.filter(contact => {
-            return Object.keys(contact).map((key) => {
-                if(key.id === 'id') return false; // id 제외
-                return (contact[key]).toString().includes(keyword);
-            }).includes(true);
-        })
+        const filteredContacts = contacts.filter(contact => Object.keys(contact).map((key) => (contact[key]).toString().includes(keyword)).includes(true))
 
         return(
             <ul className={'contacts-list'} >
                 {
-                    filteredContacts.map((contact) => <ContactListItem key={contact.id} contact={contact} />) // key index X, contents와 관련있는 값으로?
+                    filteredContacts.map((contact) => <ContactListItem key={contact[id]} contact={contact} />) // key index X, contents와 관련있는 값으로?
                 }
             </ul>
         )
