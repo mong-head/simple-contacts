@@ -31,6 +31,7 @@
             * ex ) onSubmit인 경우 : ```handleSubmit```
             * 명사형으로 적지 말기 (```handler```같이 쓰지 말기)
     * state : 명사형
+    * [참고: event handler naming in react](https://blog.sonim1.com/220)
 
 * 쓸데없는 확인 구문 쓰지 말기
 
