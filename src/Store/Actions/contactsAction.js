@@ -1,14 +1,16 @@
+import {contactsType} from './types';
+
 export const contactsAddAction = (contact) => ({
-    type: 'CONTACTS_ADD',
+    type: contactsType.CONTACTS_ADD,
     contact
 });
 
 export const contactsDeleteAction = (contact) => ({
-    type: 'CONTACTS_DELETE',
+    type: contactsType.CONTACTS_DELETE,
     contact
 });
 
 export const contactsSetAction = (contacts) => ({
-    type: 'CONTACTS_SET',
+    type: contactsType.CONTACTS_SET,
     contacts
 });

@@ -1,4 +1,6 @@
+import {selectedContactType} from './types';
+
 export const selectedContactAction = (contact) => ({
-    type: 'SELECTED_CONTACT',
+    type: selectedContactType.SELECTED_CONTACT,
     contact
 });
