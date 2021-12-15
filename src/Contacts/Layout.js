@@ -7,6 +7,7 @@ import Enrollment from './Enroll/Enrollment';
 import {contactsDeleteAction, contactsSetAction} from '../Store/Actions/contactsAction';
 import {selectedContactAction} from '../Store/Actions/selectedContactAction'
 import {id, symbolizeObjectId} from '../symbolizeObjectId';
+import {setContacts} from '../Store/Sagas/contactsSaga';
 
 class Layout extends Component {
 
@@ -19,8 +20,10 @@ class Layout extends Component {
     }
 
     async componentDidMount() {
-        const results = (await fetchApi().getAll()).map(symbolizeObjectId);
-        this.props.setContacts(results);
+        setTimeout(()=>{
+            this.props.setContacts();
+        });
+        console.log('mount')
     }
 
     onClickAddButton = (state) => {
@@ -30,8 +33,9 @@ class Layout extends Component {
     onClickDeleteButton = async () => {
         const {selectedContact,deleteContact,emptySelectedContact} = this.props;
         
-        const deletedContact = await fetchApi().deleteContact(selectedContact[id]);
-        deleteContact(symbolizeObjectId(deletedContact));
+        //const deletedContact = await fetchApi().deleteContact(selectedContact[id]);
+        //deleteContact(symbolizeObjectId(deletedContact));
+        deleteContact(selectedContact);
         emptySelectedContact();
     }
 
@@ -60,7 +64,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (Dispatch) => {
     return {
-        setContacts : (contacts) => Dispatch(contactsSetAction(contacts)),
+        setContacts : () => Dispatch(contactsSetAction()),
+        //deleteContact : (contact) => Dispatch(contactsDeleteAction(contact)),
         deleteContact : (contact) => Dispatch(contactsDeleteAction(contact)),
         emptySelectedContact : () => Dispatch(selectedContactAction(false))
     }

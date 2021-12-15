@@ -8,7 +8,8 @@ const contactsReducer = (state = [], action) => {
         case contactsType.CONTACTS_DELETE:
             return state.filter(contact => contact[id] !== action.contact[id]);
         case contactsType.CONTACTS_SET:
-            return action.contacts;
+            console.log('reducer',action.contacts ? action.contacts : state)
+            return action.contacts ? action.contacts : state;
         default:
             return state;
     }

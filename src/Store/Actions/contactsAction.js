@@ -10,7 +10,7 @@ export const contactsDeleteAction = (contact) => ({
     contact
 });
 
-export const contactsSetAction = (contacts) => ({
-    type: contactsType.CONTACTS_SET,
-    contacts
-});
+export const contactsSetAction = () => {
+    console.log('contactsSetAction',contactsType.CONTACTS_SET)
+    return { type: contactsType.CONTACTS_SET }
+};
