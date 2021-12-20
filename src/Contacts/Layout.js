@@ -20,14 +20,11 @@ class Layout extends Component {
     }
 
     async componentDidMount() {
-        setTimeout(()=>{
-            this.props.setContacts();
-        });
-        console.log('mount')
+        this.props.setContacts();
     }
 
     onClickAddButton = (state) => {
-        this.setState({addButton: state})
+        this.setState({addButton: state});
     }
 
     onClickDeleteButton = async () => {
@@ -51,6 +48,7 @@ class Layout extends Component {
                         <Contacts onClickAddButton={this.onClickAddButton} onClickDeleteButton={this.onClickDeleteButton}/> : 
                         <Enrollment onClickAddButton={this.onClickAddButton} />
                 }
+                <button onClick={()=> {this.props.setContacts()}}></button>
             </div>
         );
     }

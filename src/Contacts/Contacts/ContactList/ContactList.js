@@ -10,7 +10,7 @@ class ContactList extends Component {
     render(){
         const {contacts,keyword} = this.props;
 
-        const filteredContacts = contacts.filter(contact => Object.keys(contact).map((key) => (contact[key]).toString().includes(keyword)).includes(true))
+        const filteredContacts = contacts && contacts.filter(contact => Object.keys(contact).map((key) => (contact[key]).toString().includes(keyword)).includes(true))
 
         return(
             <ul className={'contacts-list'} >

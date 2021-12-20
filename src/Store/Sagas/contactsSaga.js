@@ -6,11 +6,10 @@ import {symbolizeObjectId,id} from '../../symbolizeObjectId'
 
 export function* setContacts(){
     try{
-        console.log('setContacts saga 실행')
         const response = yield call(fetchApi().getAll);
-        yield put({type: contactsType.CONTACTS_SET, contacts : response.map(symbolizeObjectId)});
+        yield put({type: contactsType.CONTACTS_SET_RESULT, contacts : response.map(symbolizeObjectId)});
     } catch (error) {
-        yield put({type: contactsType.CONTACTS_SET, contacts : {}})
+        yield put({type: contactsType.CONTACTS_SET_RESULT, contacts : {}})
     } finally {
     }
 }
@@ -19,7 +18,9 @@ export function* deleteContact(contact){
     try{
         console.log('deleteContact saga 실행')
         //const deletedContact = yield call(fetchApi().deleteContact(contact[id]));
-
+      
+        
+  
     } catch (error) {
 
     } finally {

@@ -11,6 +11,5 @@ export const contactsDeleteAction = (contact) => ({
 });
 
 export const contactsSetAction = () => {
-    console.log('contactsSetAction',contactsType.CONTACTS_SET)
     return { type: contactsType.CONTACTS_SET }
 };
