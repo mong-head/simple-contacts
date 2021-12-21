@@ -51,8 +51,8 @@ class Enrollment extends Component {
         if(!this.validateValue(contact)) return;
 
         contact.age = Number(contact.age);
-        const addedContact = await fetchApi().addContact(contact);
-        addContact(symbolizeObjectId(addedContact));
+    
+        addContact(contact);
         onClickAddButton(true);
     }
 

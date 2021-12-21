@@ -1,4 +1,4 @@
-import {call, put, select, takeLatest, fork, takeEvery} from 'redux-saga/effects';
+import {call, put, takeLatest} from 'redux-saga/effects';
 import { contactsType } from '../Actions/types';
 import * as contactsSaga from '../Sagas/contactsSaga';
 import fetchApi from './../../fetchApi';
@@ -14,15 +14,23 @@ export function* setContacts(){
     }
 }
 
-export function* deleteContact(contact){
+export function* deleteContact({contact}){
     try{
-        console.log('deleteContact saga 실행')
-        //const deletedContact = yield call(fetchApi().deleteContact(contact[id]));
-      
-        
-  
+        const deletedContact = yield call(fetchApi().deleteContact,contact[id]);
+        yield put({type: contactsType.CONTACTS_DELETE_RESULT, contact : symbolizeObjectId(deletedContact)})
     } catch (error) {
+        yield put({type: contactsType.CONTACTS_DELETE_RESULT})
+    } finally {
 
+    }
+}
+
+export function* addContact({contact}){
+    try{
+        const addedContact = yield call(fetchApi().addContact,contact);
+        yield put({type: contactsType.CONTACTS_ADD_RESULT, contact : symbolizeObjectId(addedContact)})
+    } catch(error){
+        yield put({type: contactsType.CONTACTS_ADD_RESULT})
     } finally {
 
     }
@@ -32,5 +40,6 @@ export function* deleteContact(contact){
 const saga = [
     takeLatest(contactsType.CONTACTS_SET, contactsSaga.setContacts),
     takeLatest(contactsType.CONTACTS_DELETE, contactsSaga.deleteContact),
+    takeLatest(contactsType.CONTACTS_ADD, contactsSaga.addContact),
 ];
 export default saga; 

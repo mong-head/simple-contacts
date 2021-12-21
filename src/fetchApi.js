@@ -44,10 +44,10 @@ export default function () {
     }
 
     return {
-        getAll: async function () { // 마지막 읽은 시각을 찾는다
+        getAll: async function () { 
             return await fetchAction(null,'get', null);
         },
-        getContact: async function (id) { // 마지막 읽은 시각을 찾는다
+        getContact: async function (id) {
             return await fetchAction(id,'get', null);
         },
         addContact: async function (contact) {

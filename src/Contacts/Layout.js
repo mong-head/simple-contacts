@@ -30,8 +30,6 @@ class Layout extends Component {
     onClickDeleteButton = async () => {
         const {selectedContact,deleteContact,emptySelectedContact} = this.props;
         
-        //const deletedContact = await fetchApi().deleteContact(selectedContact[id]);
-        //deleteContact(symbolizeObjectId(deletedContact));
         deleteContact(selectedContact);
         emptySelectedContact();
     }
@@ -48,7 +46,6 @@ class Layout extends Component {
                         <Contacts onClickAddButton={this.onClickAddButton} onClickDeleteButton={this.onClickDeleteButton}/> : 
                         <Enrollment onClickAddButton={this.onClickAddButton} />
                 }
-                <button onClick={()=> {this.props.setContacts()}}></button>
             </div>
         );
     }
@@ -63,7 +60,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (Dispatch) => {
     return {
         setContacts : () => Dispatch(contactsSetAction()),
-        //deleteContact : (contact) => Dispatch(contactsDeleteAction(contact)),
         deleteContact : (contact) => Dispatch(contactsDeleteAction(contact)),
         emptySelectedContact : () => Dispatch(selectedContactAction(false))
     }
