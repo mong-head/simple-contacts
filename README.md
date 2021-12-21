@@ -87,7 +87,7 @@ npm i redux-saga
         ```
 
 ### saga 예시
-* [src/Store/index.js](.\src\Store\index.js)
+* [src/Store/index.js](./src/Store/index.js)
     1. saga middle ware 생성
     2. reducer 결합
     3. store 생성 : reducer결합한거, middleware 연결
@@ -105,7 +105,7 @@ npm i redux-saga
         ]);
     }
     ```
-* [src/Strore/Sagas/contactsSaga.js](.\src\Store\Sagas\contactsSaga.js)
+* [src/Strore/Sagas/contactsSaga.js](./src/Store/Sagas/contactsSaga.js)
     * 무한히 saga를 호출하지 않게 하기 위해서 `takeLatest`에서 지켜보는 type과 `put`하는 type를 같게 하면 안된다.
         * error ([관련 이슈](https://velog.io/@mong-head/Error-React-Redux-Saga-saga-%EB%AC%B4%ED%95%9C%ED%9E%88-%EC%8B%A4%ED%96%89))
             * `put`과 `takeLatest` type 같음
@@ -127,7 +127,7 @@ npm i redux-saga
             export default saga; 
             ```
         * good
-            * [type분리](.\src\Store\Actions\types.js) 
+            * [type분리](./src/Store/Actions/types.js) 
             * `put`과 `takeLatest` type 다름
             ```js
             export function* setContacts(){
