@@ -1,6 +1,8 @@
 # 간단한 연락처
 
-배포 : https://simple-contacts-react.herokuapp.com/
+* 배포 : https://simple-contacts-react.herokuapp.com/
+* redux 사용
+* [redux-saga 사용 branch](https://github.com/mong-head/simple-contacts/tree/redux-saga) : `git checkout redux-saga`
 
 ## 새롭게 알게된 점
 
